@@ -30,11 +30,6 @@ RUN yarn set version stable
 RUN corepack enable
 RUN corepack prepare yarn@stable --activate
 
-# Install Supabase CLI.
-RUN wget -q -O /tmp/supabase.deb https://github.com/supabase/cli/releases/download/v1.99.5/supabase_1.99.5_linux_$(dpkg --print-architecture).deb \
-  && dpkg -i /tmp/supabase.deb \
-  && rm /tmp/supabase.deb
-
 # Install act to test github actions locally
 RUN curl -s https://raw.githubusercontent.com/nektos/act/master/install.sh | sudo bash
 

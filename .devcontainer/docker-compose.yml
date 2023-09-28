@@ -1,4 +1,4 @@
-version: "3.8"
+version: '3.8'
 
 volumes:
   vscode-extensions:
@@ -25,13 +25,10 @@ services:
     networks:
       - default
     ports:
-      - "54321:54321"
-      - "54322:54322"
-      - "54323:54323"
-      - "54324:54324"
+      - '3000:3000'
 
     extra_hosts:
-      - "host.docker.internal:host-gateway"
+      - 'host.docker.internal:host-gateway'
     volumes:
       - ..:/workspace:cached
       - ~/.ssh:/root/.ssh
