@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { supabase } from '@/utils/supabase'
+import { supabase } from '@/utils/getClientSideSupabaseClient'
 import { useSession, useUser } from '@/context/SessionContextProvider'
 
 export default function AppPage() {

@@ -1,10 +1,10 @@
 'use client'
 
 import { useState } from 'react'
-import { supabase } from '../../../utils/supabase'
 import { useRouter } from 'next/navigation'
 import requestOTP from '@/edge-functions/requestOTP'
 import verifyOTP from '@/edge-functions/verifyOTP'
+import { supabase } from '@/utils/getClientSideSupabaseClient'
 
 export default function SignInPage() {
   const [email, setEmail] = useState<string>('')

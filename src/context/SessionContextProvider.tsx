@@ -7,10 +7,10 @@ import React, {
   useContext,
   useCallback
 } from 'react'
-import { supabase } from '../utils/supabase'
 import { User, Session } from '@supabase/supabase-js'
 import { COPYFUSE_TOKEN_COOKIE } from '@/constants'
 import Cookies from 'js-cookie'
+import { supabase } from '@/utils/getClientSideSupabaseClient'
 
 interface SessionContextValue {
   session: Session | null

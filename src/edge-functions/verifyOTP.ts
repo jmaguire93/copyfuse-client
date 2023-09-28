@@ -1,4 +1,4 @@
-import { supabase } from '../utils/supabase'
+import { supabase } from '@/utils/getClientSideSupabaseClient'
 
 export default async function verifyOTP(email: string, otp: string) {
   const { data, error } = await supabase.functions.invoke('verify-otp-email', {
