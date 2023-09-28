@@ -6,6 +6,7 @@ devcontainer.
 Start Copfuse Client with:
 
 ```bash
+yarn
 yarn dev
 ```
 
