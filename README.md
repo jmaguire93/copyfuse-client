@@ -44,6 +44,7 @@ yarn set version stable
 Start Copfuse Client with:
 
 ```bash
+yarn
 yarn dev
 ```
 
