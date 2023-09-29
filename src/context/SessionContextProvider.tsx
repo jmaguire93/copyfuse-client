@@ -8,13 +8,11 @@ import React, {
   useCallback
 } from 'react'
 import { User, Session } from '@supabase/supabase-js'
-import { COPYFUSE_TOKEN_COOKIE } from '@/constants'
-import Cookies from 'js-cookie'
 import { supabase } from '@/utils/getClientSideSupabaseClient'
+import { useRouter } from 'next/navigation'
 
 interface SessionContextValue {
   session: Session | null
-  loading: boolean
 }
 
 const Context = createContext<SessionContextValue | null>(null)
@@ -25,15 +23,7 @@ interface SessionContextProviderProps {
 
 const SessionContextProvider = (props: SessionContextProviderProps) => {
   const [session, setSession] = useState<Session | null>(null)
-  const [loading, setLoading] = useState<boolean>(true)
-
-  const setSessionCookie = useCallback((session: Session | null) => {
-    if (session) {
-      Cookies.set(COPYFUSE_TOKEN_COOKIE, session.access_token)
-    } else {
-      Cookies.remove(COPYFUSE_TOKEN_COOKIE)
-    }
-  }, [])
+  const router = useRouter()
 
   const onSessionChange = useCallback(function (
     callback: (session: Session | null) => void
@@ -61,28 +51,21 @@ const SessionContextProvider = (props: SessionContextProviderProps) => {
   useEffect(() => {
     const { cancel } = onSessionChange((session: Session | null) => {
       setSession(session)
-      setSessionCookie(session)
-      setLoading(false)
+      // router.refresh()
     })
 
     getSession()
       .then(session => {
         setSession(session)
-        setLoading(false)
       })
       .catch(error => {
         console.error('Error fetching session:', error)
-        setLoading(false)
       })
 
     return cancel
-  }, [getSession, onSessionChange, setSessionCookie])
+  }, [getSession, onSessionChange, router])
 
-  useEffect(() => {
-    setSessionCookie(session)
-  }, [session, setSessionCookie])
-
-  const value = { session, loading }
+  const value = { session }
 
   return <Context.Provider value={value}>{props.children}</Context.Provider>
 }
@@ -95,13 +78,13 @@ export const useUser: () => User | null = () => {
   return context.session ? context.session.user : null
 }
 
-export const useSession: () => SessionContextValue | null = () => {
+export const useSession: () => Session | null = () => {
   const context = useContext(Context)
   if (!context) {
     throw new Error('useSession must be used within a SessionContextProvider')
   }
 
-  return context
+  return context.session
 }
 
 export default SessionContextProvider

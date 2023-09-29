@@ -1,23 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server'
-import getServerSideSupabaseClient from './utils/getServerSideSupabaseClient'
+import { createMiddlewareClient } from '@supabase/auth-helpers-nextjs'
 
 // Redirect to sign in if not authenticated
-export async function middleware(request: NextRequest) {
-  try {
-    const supabase = getServerSideSupabaseClient(request.cookies)
+export async function middleware(req: NextRequest) {
+  const res = NextResponse.next()
+  const supabase = createMiddlewareClient({ req, res })
+  await supabase.auth.getSession()
 
-    const {
-      data: { user }
-    } = await supabase.auth.getUser()
-
-    if (user) {
-      return
-    }
-  } catch (err) {
-    console.error(err)
-  }
-
-  return NextResponse.redirect(new URL('/auth/sign_in', request.url))
+  return res
 }
 
 // Run on all requests

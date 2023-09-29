@@ -1,0 +1,17 @@
+'use client'
+
+import { supabase } from '@/utils/getClientSideSupabaseClient'
+
+export default function SignOut() {
+  const handleSignOut = function () {
+    supabase.auth.signOut()
+  }
+
+  return (
+    <button
+      onClick={handleSignOut}
+      className='mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600'>
+      Sign Out
+    </button>
+  )
+}
