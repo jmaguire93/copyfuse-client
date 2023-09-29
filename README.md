@@ -13,7 +13,6 @@ yarn dev
 Create a root .env file and add the following to it from your supabase instance:
 
 ```bash
-SUPABASE_URL=http://host.docker.internal:54321
 NEXT_PUBLIC_SUPABASE_URL=http://localhost:54321
 NEXT_PUBLIC_SUPABASE_ANON_KEY=
 
@@ -42,13 +41,7 @@ brew install yarn
 yarn set version stable
 ```
 
-Create a root .env file and add the following to it from your supabase instance:
-
-```bash
-NEXT_PUBLIC_SUPABASE_URL=http://localhost:54321
-NEXT_PUBLIC_SUPABASE_ANON_KEY=
-
-```
+Ensure you include the .env file from above.
 
 Start Copfuse Client with:
 

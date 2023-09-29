@@ -19,9 +19,11 @@ const Context = createContext<SessionContextValue | null>(null)
 
 interface SessionContextProviderProps {
   children: React.ReactNode | React.ReactNode[]
+  accessToken: string | null
 }
 
 const SessionContextProvider = (props: SessionContextProviderProps) => {
+  const { children, accessToken } = props
   const [session, setSession] = useState<Session | null>(null)
   const router = useRouter()
 
@@ -51,7 +53,10 @@ const SessionContextProvider = (props: SessionContextProviderProps) => {
   useEffect(() => {
     const { cancel } = onSessionChange((session: Session | null) => {
       setSession(session)
-      // router.refresh()
+      // Refresh page if access token is no longer valid
+      if (session?.access_token !== accessToken) {
+        router.refresh()
+      }
     })
 
     getSession()
@@ -63,11 +68,11 @@ const SessionContextProvider = (props: SessionContextProviderProps) => {
       })
 
     return cancel
-  }, [getSession, onSessionChange, router])
+  }, [accessToken, getSession, onSessionChange, router])
 
   const value = { session }
 
-  return <Context.Provider value={value}>{props.children}</Context.Provider>
+  return <Context.Provider value={value}>{children}</Context.Provider>
 }
 
 export const useUser: () => User | null = () => {

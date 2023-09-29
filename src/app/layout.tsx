@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import Providers from './providers'
 import NavBar from '@/components/navigation/NavBar'
+import getServerSideSupabaseClient from '@/utils/getServerSideSupabaseClient'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -11,7 +12,7 @@ export const metadata: Metadata = {
   description: 'A Copyfuse App'
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children
 }: {
   children: React.ReactNode

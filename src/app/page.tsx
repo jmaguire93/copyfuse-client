@@ -4,14 +4,13 @@ import getServerSideSupabaseClient from '@/utils/getServerSideSupabaseClient'
 
 export default async function AppPage() {
   const supabase = getServerSideSupabaseClient()
+  const { data } = await supabase.auth.getSession()
 
-  const {
-    data: { user }
-  } = await supabase.auth.getUser()
-
-  if (!user) {
+  if (!data.session) {
     redirect('/auth/sign_in')
   }
+
+  const user = data.session.user
 
   return (
     <div className='flex min-h-screen flex-col items-center p-8'>
