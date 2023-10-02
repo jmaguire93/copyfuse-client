@@ -1,19 +1,27 @@
+'use client'
+
 import SessionContextProvider from '@/context/SessionContextProvider'
-import getServerSideSupabaseClient from '@/utils/getServerSideSupabaseClient'
+import { ThemeProvider } from '@mui/material/styles'
+import berryTheme from '@/themes/berry'
+import CssBaseline from '@mui/material/CssBaseline'
 
-const Providers = async ({ children }: { children: React.ReactNode }) => {
-  const supabase = getServerSideSupabaseClient()
+interface ProviderProps {
+  children: React.ReactNode | React.ReactNode[]
+  accessToken: string | null
+}
 
-  const {
-    data: { session }
-  } = await supabase.auth.getSession()
-
-  const accessToken = session?.access_token || null
+const Providers = (props: ProviderProps) => {
+  const { children, accessToken } = props
 
   return (
-    <SessionContextProvider accessToken={accessToken}>
-      {children}
-    </SessionContextProvider>
+    <>
+      <CssBaseline />
+      <ThemeProvider theme={berryTheme}>
+        <SessionContextProvider accessToken={accessToken}>
+          {children}
+        </SessionContextProvider>
+      </ThemeProvider>
+    </>
   )
 }
 

@@ -2,7 +2,6 @@ import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import Providers from './providers'
-import NavBar from '@/components/navigation/NavBar'
 import getServerSideSupabaseClient from '@/utils/getServerSideSupabaseClient'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -17,13 +16,18 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  const supabase = getServerSideSupabaseClient()
+
+  const {
+    data: { session }
+  } = await supabase.auth.getSession()
+
+  const accessToken = session?.access_token || null
+
   return (
     <html lang='en'>
       <body className={inter.className}>
-        <>
-          <NavBar />
-          <Providers>{children}</Providers>
-        </>
+        <Providers accessToken={accessToken}>{children}</Providers>
       </body>
     </html>
   )
