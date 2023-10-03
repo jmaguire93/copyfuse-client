@@ -1,7 +1,7 @@
 import { redirect } from 'next/navigation'
 import getServerSideSupabaseClient from '@/utils/getServerSideSupabaseClient'
 import HeaderNavBar from '@/components/navigation/HeaderNavBar'
-import { APP_BAR_HEIGHT } from '../../constants'
+import { APP_BAR_HEIGHT, BORDER_RADIUS } from '../../constants'
 import Toolbar from '@mui/material/Toolbar'
 import AppDrawer from '@/components/navigation/AppDrawer'
 
@@ -23,9 +23,16 @@ export default async function AppLayout({
     <div className='flex min-h-screen'>
       <HeaderNavBar height={APP_BAR_HEIGHT} />
       <AppDrawer>{emptyToolbar}</AppDrawer>
-      <main className='flex grow flex-col overflow-hidden'>
+      <main className='flex grow flex-col overflow-hidden px-2'>
         {emptyToolbar}
-        <div className='h-full w-full bg-slate-100'>{children}</div>
+        <div
+          style={{
+            borderTopLeftRadius: BORDER_RADIUS,
+            borderTopRightRadius: BORDER_RADIUS
+          }}
+          className='h-full w-full bg-slate-100 p-6'>
+          {children}
+        </div>
       </main>
     </div>
   )

@@ -58,6 +58,7 @@ const AppDrawer = (props: AppDrawerProps) => {
         [`& .MuiDrawer-paper`]: {
           borderRight: 'none',
           width: DRAWER_WIDTH,
+          paddingLeft: '5px',
           boxSizing: 'border-box'
         }
       }}>
@@ -66,7 +67,7 @@ const AppDrawer = (props: AppDrawerProps) => {
         <List>
           {navItems.map(navItem => (
             <Link key={navItem.href} href={navItem.href} passHref>
-              <ListItem>
+              <ListItem className='py-1' disablePadding>
                 <ListItemButton
                   selected={pathname === navItem.href}
                   sx={{

@@ -26,6 +26,9 @@ export default async function RootLayout({
 
   return (
     <html lang='en'>
+      <head>
+        <meta name='description' content='Copyfuse Client App' />
+      </head>
       <body className={inter.className}>
         <Providers accessToken={accessToken}>{children}</Providers>
       </body>
