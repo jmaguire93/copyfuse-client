@@ -1,43 +1,29 @@
 import { createTheme } from '@mui/material/styles'
 import colors from './colors'
 import componentStyleOverrides from './compStyleOverride'
-import themePalette from './palette'
 import themeTypography from './typography'
+import { ThemeOption, mixins } from '../themeOptions'
+import themePalette from './palette'
+import commonThemeOption from '../commonThemeOptions'
 
-const color = colors
+const color = { ...colors, ...commonThemeOption.colors }
 
-const themeOption = {
-  customization: {
-    borderRadius: 14
-  },
+export const themeOption = {
+  ...commonThemeOption,
   colors: color,
-  heading: color.grey900,
   paper: color.paper,
   backgroundDefault: color.paper,
-  background: color.primaryLight,
   darkTextPrimary: color.grey900,
-  darkTextSecondary: color.grey500,
   textDark: color.grey900,
   menuSelected: color.secondaryDark,
-  menuSelectedBack: color.secondaryLight,
-  divider: color.grey200
-}
-
-export type ThemeOption = typeof themeOption
+  menuSelectedBack: color.secondaryLight
+} as ThemeOption
 
 const themeOptions = {
   direction: 'ltr' as const,
 
-  palette: themePalette(themeOption),
-  mixins: {
-    toolbar: {
-      minHeight: '48px',
-      padding: '16px',
-      '@media (min-width: 600px)': {
-        minHeight: '48px'
-      }
-    }
-  },
+  palette: themePalette(themeOption, 'light'),
+  mixins,
   typography: themeTypography(themeOption)
 }
 

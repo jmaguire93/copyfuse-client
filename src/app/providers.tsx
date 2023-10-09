@@ -2,7 +2,6 @@
 
 import SessionContextProvider from '@/context/SessionContextProvider'
 import { ThemeProvider } from '@mui/material/styles'
-import berryTheme from '@/themes/berry'
 import CssBaseline from '@mui/material/CssBaseline'
 import createEmotionCache from '@/utils/createEmotionCache'
 import { CacheProvider } from '@emotion/react'
@@ -11,6 +10,7 @@ import { sidebarOpenAtom } from '@/atoms/store'
 import { useTheme } from '@mui/material/styles'
 import { useEffect } from 'react'
 import { useAtom } from 'jotai/react'
+import useLightDarkModeToggle from '@/hooks/useLightDarkModeToggle'
 
 interface ProviderProps {
   children: React.ReactNode | React.ReactNode[]
@@ -22,6 +22,7 @@ const Providers = (props: ProviderProps) => {
   const theme = useTheme()
   const largerThanMd = useMediaQuery(theme.breakpoints.up('md'))
   const [, setSidebarOpen] = useAtom(sidebarOpenAtom)
+  const activeTheme = useLightDarkModeToggle()
 
   useEffect(() => {
     if (largerThanMd === false) {
@@ -33,8 +34,8 @@ const Providers = (props: ProviderProps) => {
 
   return (
     <CacheProvider value={emotionCache}>
-      <CssBaseline />
-      <ThemeProvider theme={berryTheme}>
+      <ThemeProvider theme={activeTheme}>
+        <CssBaseline />
         <SessionContextProvider accessToken={accessToken}>
           {children}
         </SessionContextProvider>

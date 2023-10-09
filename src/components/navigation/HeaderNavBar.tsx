@@ -9,14 +9,14 @@ import IconButton from '@mui/material/IconButton'
 import Toolbar from '@mui/material/Toolbar'
 import Tooltip from '@mui/material/Tooltip'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
 import { useUser } from '@/context/SessionContextProvider'
 import { DRAWER_WIDTH } from '@/constants'
 import AppIcon from '../AppIcon'
 import UserMenu from '@/user/UserMenu'
 import NotificationIconButton from '../notification/NotificationIconButton'
 import { useAtom } from 'jotai'
-import { sidebarOpenAtom } from '@/atoms/store'
+import { darkModeAtom, sidebarOpenAtom } from '@/atoms/store'
+import DarkModeToggle from './DarkModeToggle'
 
 interface HeaderNavBarProps {
   height: number
@@ -25,6 +25,7 @@ interface HeaderNavBarProps {
 const HeaderNavBar = (props: HeaderNavBarProps) => {
   const user = useUser()
   const [, setSidebarOpen] = useAtom(sidebarOpenAtom)
+  const [darkMode, setDarkMode] = useAtom(darkModeAtom)
 
   const toggleSidebarOpen = () => {
     setSidebarOpen(prev => !prev)
@@ -46,6 +47,7 @@ const HeaderNavBar = (props: HeaderNavBarProps) => {
           </IconButton>
         </Box>
         <div className='flex flex-1 items-center justify-end md:gap-3'>
+          <DarkModeToggle darkMode={darkMode} setDarkMode={setDarkMode} />
           <NotificationIconButton />
           {user ? (
             <UserMenu />

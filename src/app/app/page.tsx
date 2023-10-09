@@ -1,5 +1,6 @@
 import { redirect } from 'next/navigation'
 import getServerSideSupabaseClient from '@/utils/getServerSideSupabaseClient'
+import { Paper, Typography } from '@mui/material'
 
 export default async function AppPage() {
   const supabase = getServerSideSupabaseClient()
@@ -10,10 +11,14 @@ export default async function AppPage() {
   }
 
   return (
-    <div className='bg-white p-4 rounded-xl mb-8'>
-      <div className='flex h-full flex-col gap-4'>
-        <div className='text-xl font-semibold'>Dashboard</div>
+    <Paper>
+      <div className='p-4 mb-8'>
+        <div className='flex h-full flex-col gap-4'>
+          <Typography variant='h6' className='text-xl font-bold'>
+            Dashboard
+          </Typography>
+        </div>
       </div>
-    </div>
+    </Paper>
   )
 }

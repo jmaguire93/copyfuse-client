@@ -1,4 +1,4 @@
-import { ThemeOption } from '.'
+import { ThemeOption } from '../themeOptions'
 
 export default function themeTypography(theme: ThemeOption) {
   return {

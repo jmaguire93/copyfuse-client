@@ -1,20 +1,10 @@
-// paper & background
-const colors = {
-  paper: '#ffffff',
-
-  // primary
+const commonColors = {
+  // primary dark
   primaryLight: '#e3f2fd',
   primaryMain: '#2196f3',
   primaryDark: '#1e88e5',
   primary200: '#90caf9',
   primary800: '#1565c0',
-
-  // secondary
-  secondaryLight: '#ede7f6',
-  secondaryMain: '#673ab7',
-  secondaryDark: '#5e35b1',
-  secondary200: '#b39ddb',
-  secondary800: '#4527a0',
 
   // success Colors
   successLight: '#b9f6ca',
@@ -77,4 +67,4 @@ const colors = {
   darkTextSecondary: '#8492c4'
 }
 
-export default colors
+export default commonColors

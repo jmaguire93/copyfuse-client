@@ -1,18 +1,20 @@
 import RecentlyRegisteredUsers from '@/components/users/RecentlyRegisteredUsers'
+import Paper from '@mui/material/Paper'
+import Typography from '@mui/material/Typography'
 
 export default async function ActivityPage() {
   return (
-    <>
-      <div className='mb-8'>
-        <div className='bg-white p-4 rounded-xl'>
+    <div className='mb-8'>
+      <Paper>
+        <div className='p-4'>
           <div className='flex h-full flex-col gap-4'>
-            <div className='text-xl font-semibold'>
+            <Typography variant='h6' className='text-xl font-bold'>
               Recently Registered Users
-            </div>
+            </Typography>
           </div>
         </div>
-        <RecentlyRegisteredUsers />
-      </div>
-    </>
+      </Paper>
+      <RecentlyRegisteredUsers />
+    </div>
   )
 }

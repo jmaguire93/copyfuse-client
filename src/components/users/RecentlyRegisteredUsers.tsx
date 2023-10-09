@@ -6,6 +6,7 @@ import CircularProgress from '@mui/material/CircularProgress'
 import { useTheme } from '@mui/material/styles'
 import Paper from '@mui/material/Paper'
 import subDays from 'date-fns/subDays'
+import AccountCircleTwoToneIcon from '@mui/icons-material/AccountCircleTwoTone'
 
 export default function RecentlyRegisteredUsers() {
   const { registeredUsers, loading } = useRegisteredUsers()
@@ -50,11 +51,12 @@ export default function RecentlyRegisteredUsers() {
               backgroundColor: theme.palette.secondary.main,
               color: theme.palette.secondary.contrastText
             }}
-            className={`flex justify-center items-center text-center overflow-hidden cursor-pointer h-28`}>
+            className={`px-6 flex justify-between items-center overflow-hidden cursor-pointer h-28`}>
             <div className=''>
               <Typography variant='h4'> {item.count}</Typography>
               <Typography variant='body1'>{item.title}</Typography>
             </div>
+            <AccountCircleTwoToneIcon color='inherit' fontSize='large' />
           </Paper>
         ))}
       </dl>

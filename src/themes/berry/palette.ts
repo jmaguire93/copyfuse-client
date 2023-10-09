@@ -1,8 +1,28 @@
-import { ThemeOption } from '.'
+import { ThemeOption } from './themeOptions'
 
-export default function themePalette(theme: ThemeOption) {
+declare module '@mui/material/styles' {
+  interface Palette {
+    content: {
+      background: string
+    }
+    shell: {
+      background: string
+      contrastBackground: string
+    }
+  }
+  interface PaletteOptions {
+    content?: {
+      background?: string
+    }
+    shell?: {
+      background?: string
+      contrastBackground?: string
+    }
+  }
+}
+
+export default function commonThemePaletteOptions(theme: ThemeOption) {
   return {
-    mode: 'light' as const,
     common: {
       black: theme.colors?.darkPaper
     },
@@ -65,6 +85,9 @@ export default function themePalette(theme: ThemeOption) {
     background: {
       paper: theme.paper,
       default: theme.backgroundDefault
+    },
+    content: {
+      background: theme.colors?.background
     }
   }
 }

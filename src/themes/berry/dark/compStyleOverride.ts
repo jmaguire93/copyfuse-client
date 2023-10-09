@@ -1,4 +1,4 @@
-import { ThemeOption } from '.'
+import { ThemeOption } from '../themeOptions'
 
 export default function componentStyleOverrides(theme: ThemeOption) {
   const bgColor = theme.colors?.grey50
@@ -181,7 +181,7 @@ export default function componentStyleOverrides(theme: ThemeOption) {
       styleOverrides: {
         tooltip: {
           color: theme.paper,
-          background: theme.colors?.grey700
+          background: theme.colors?.grey300
         }
       }
     }
